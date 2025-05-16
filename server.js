@@ -1,7 +1,7 @@
 import { WebSocketServer } from 'ws';
 import wrtc from '@roamhq/wrtc';
 
-const wss = new WebSocketServer({ port: 8080 });
+const wss = new WebSocketServer({ port: 8200 });``
 
 function receiveChannelCallback(event) {
   const channel = event.channel;
@@ -25,7 +25,7 @@ wss.on('connection', ws => {
      remoteConnection.ondatachannel = receiveChannelCallback;
 
 
-      remoteConnection.onicecandidate = (e) => {
+      remoteConnection.onicecandidate = ({ candidate }) => {
         if (candidate) ws.send(JSON.stringify({ type: 'candidate', candidate }));
       };
 
